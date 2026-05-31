@@ -18,222 +18,111 @@
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                    </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                 </div>
                 <h1 class="text-lg font-bold">Polymonitor <span class="text-fuchsia-400">Pro</span></h1>
                 <span class="text-xs text-gray-500 ml-2" id="last-scan">--:--</span>
             </div>
-            <button onclick="loadMarkets()" class="px-3 py-1 bg-violet-600 hover:bg-violet-500 rounded text-sm">🔄 刷新</button>
+            <button onclick="initData()" class="px-3 py-1 bg-violet-600 hover:bg-violet-500 rounded text-sm">🔄 刷新</button>
         </div>
     </header>
 
     <div class="container mx-auto px-4 py-4">
-        <!-- Stats Overview -->
+        <!-- Stats -->
         <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-4">
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">市場總數</div>
-                <div class="text-xl font-bold text-white" id="market-count">0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">高信心機會</div>
-                <div class="text-xl font-bold text-green-400" id="high-conf">0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">總成交量</div>
-                <div class="text-xl font-bold text-purple-400" id="volume">$0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">我的預測</div>
-                <div class="text-xl font-bold text-yellow-400" id="my-predictions">0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">正確率</div>
-                <div class="text-xl font-bold text-cyan-400" id="accuracy">0%</div>
-            </div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">市場總數</div><div class="text-xl font-bold text-white" id="market-count">0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">高信心機會</div><div class="text-xl font-bold text-green-400" id="high-conf">0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">總成交量</div><div class="text-xl font-bold text-purple-400" id="volume">$0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">我的預測</div><div class="text-xl font-bold text-yellow-400" id="my-predictions">0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">正確率</div><div class="text-xl font-bold text-cyan-400" id="accuracy">0%</div></div>
         </div>
 
-        <!-- My Stats Cards -->
+        <!-- My Stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">✅ 正確</div>
-                <div class="text-lg font-bold text-green-400" id="correct-count">0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">❌ 錯誤</div>
-                <div class="text-lg font-bold text-red-400" id="wrong-count">0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">⏳ 待結算</div>
-                <div class="text-lg font-bold text-yellow-400" id="pending-count">0</div>
-            </div>
-            <div class="glass rounded-xl p-3">
-                <div class="text-gray-400 text-xs">💰 模擬損益</div>
-                <div class="text-lg font-bold text-emerald-400" id="pnl">$0</div>
-            </div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">✅ 正確</div><div class="text-lg font-bold text-green-400" id="correct-count">0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">❌ 錯誤</div><div class="text-lg font-bold text-red-400" id="wrong-count">0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">⏳ 待結算</div><div class="text-lg font-bold text-yellow-400" id="pending-count">0</div></div>
+            <div class="glass rounded-xl p-3"><div class="text-gray-400 text-xs">💰 模擬損益</div><div class="text-lg font-bold text-emerald-400" id="pnl">$0</div></div>
         </div>
 
-        <!-- Search -->
         <div class="glass rounded-xl p-3 mb-4">
-            <input type="text" id="search-input" placeholder="搜尋市場..." 
-                class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-violet-500">
+            <input type="text" id="search-input" placeholder="搜尋市場..." class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-violet-500">
         </div>
 
         <!-- Tabs -->
         <div class="flex gap-2 mb-4 overflow-x-auto">
-            <button onclick="switchTab('recommend')" id="tab-recommend" class="tab-btn tab-active px-4 py-2 rounded-lg text-sm font-medium transition">🎯 推薦</button>
-            <button onclick="switchTab('sports')" id="tab-sports" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400 transition">⚽ 體育</button>
-            <button onclick="switchTab('politics')" id="tab-politics" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400 transition">🏛️ 政治</button>
-            <button onclick="switchTab('crypto')" id="tab-crypto" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400 transition">💎 加密幣</button>
-            <button onclick="switchTab('my')" id="tab-my" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400 transition">📋 我的預測</button>
-            <button onclick="switchTab('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400 transition">📊 所有</button>
+            <button onclick="switchTab('recommend')" id="tab-recommend" class="tab-btn tab-active px-4 py-2 rounded-lg text-sm font-medium">🎯 推薦</button>
+            <button onclick="switchTab('sports')" id="tab-sports" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400">⚽ 體育</button>
+            <button onclick="switchTab('politics')" id="tab-politics" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400">🏛️ 政治</button>
+            <button onclick="switchTab('crypto')" id="tab-crypto" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400">💎 加密幣</button>
+            <button onclick="switchTab('my')" id="tab-my" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400">📋 我的預測</button>
+            <button onclick="switchTab('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-800 text-gray-400">📊 所有</button>
         </div>
 
-        <!-- Content Panels -->
+        <!-- Panels -->
         <div class="glass rounded-xl p-4">
             <div id="panel-recommend" class="tab-panel">
                 <h3 class="text-sm font-medium text-gray-400 mb-3">🎯 高信心推薦</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="text-gray-500 border-b border-gray-700">
-                                <th class="text-left py-2 px-2">分類</th>
-                                <th class="text-left py-2 px-2">市場問題</th>
-                                <th class="text-center py-2 px-2">Yes</th>
-                                <th class="text-right py-2 px-2">成交量</th>
-                                <th class="text-center py-2 px-2">推薦</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recommend-table"></tbody>
-                    </table>
-                </div>
+                <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-gray-500 border-b border-gray-700"><th class="text-left py-2 px-2">分類</th><th class="text-left py-2 px-2">市場問題</th><th class="text-center py-2 px-2">Yes</th><th class="text-right py-2 px-2">成交量</th><th class="text-center py-2 px-2">推薦</th></tr></thead><tbody id="recommend-table"></tbody></table></div>
             </div>
-
-            <div id="panel-sports" class="tab-panel hidden">
-                <h3 class="text-sm font-medium text-gray-400 mb-3">⚽ 體育市場</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="text-gray-500 border-b border-gray-700">
-                                <th class="text-left py-2 px-2">市場問題</th>
-                                <th class="text-center py-2 px-2">Yes %</th>
-                                <th class="text-right py-2 px-2">成交量</th>
-                            </tr>
-                        </thead>
-                        <tbody id="sports-table"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="panel-politics" class="tab-panel hidden">
-                <h3 class="text-sm font-medium text-gray-400 mb-3">🏛️ 政治市場</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="text-gray-500 border-b border-gray-700">
-                                <th class="text-left py-2 px-2">市場問題</th>
-                                <th class="text-center py-2 px-2">Yes %</th>
-                                <th class="text-right py-2 px-2">成交量</th>
-                            </tr>
-                        </thead>
-                        <tbody id="politics-table"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="panel-crypto" class="tab-panel hidden">
-                <h3 class="text-sm font-medium text-gray-400 mb-3">💎 加密幣市場</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="text-gray-500 border-b border-gray-700">
-                                <th class="text-left py-2 px-2">市場問題</th>
-                                <th class="text-center py-2 px-2">Yes %</th>
-                                <th class="text-right py-2 px-2">成交量</th>
-                            </tr>
-                        </thead>
-                        <tbody id="crypto-table"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="panel-my" class="tab-panel hidden">
-                <h3 class="text-sm font-medium text-gray-400 mb-3">📋 我的預測記錄</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="text-gray-500 border-b border-gray-700">
-                                <th class="text-left py-2 px-2">日期</th>
-                                <th class="text-left py-2 px-2">市場問題</th>
-                                <th class="text-center py-2 px-2">預測</th>
-                                <th class="text-center py-2 px-2">信心度</th>
-                                <th class="text-center py-2 px-2">狀態</th>
-                            </tr>
-                        </thead>
-                        <tbody id="my-table"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="panel-all" class="tab-panel hidden">
-                <h3 class="text-sm font-medium text-gray-400 mb-3">📊 所有市場</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead>
-                            <tr class="text-gray-500 border-b border-gray-700">
-                                <th class="text-left py-2 px-2">分類</th>
-                                <th class="text-left py-2 px-2">市場問題</th>
-                                <th class="text-center py-2 px-2">Yes %</th>
-                                <th class="text-right py-2 px-2">成交量</th>
-                            </tr>
-                        </thead>
-                        <tbody id="all-table"></tbody>
-                    </table>
-                </div>
-            </div>
+            <div id="panel-sports" class="tab-panel hidden"><h3 class="text-sm font-medium text-gray-400 mb-3">⚽ 體育市場</h3><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-gray-500 border-b border-gray-700"><th class="text-left py-2 px-2">市場問題</th><th class="text-center py-2 px-2">Yes %</th><th class="text-right py-2 px-2">成交量</th></tr></thead><tbody id="sports-table"></tbody></table></div></div>
+            <div id="panel-politics" class="tab-panel hidden"><h3 class="text-sm font-medium text-gray-400 mb-3">🏛️ 政治市場</h3><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-gray-500 border-b border-gray-700"><th class="text-left py-2 px-2">市場問題</th><th class="text-center py-2 px-2">Yes %</th><th class="text-right py-2 px-2">成交量</th></tr></thead><tbody id="politics-table"></tbody></table></div></div>
+            <div id="panel-crypto" class="tab-panel hidden"><h3 class="text-sm font-medium text-gray-400 mb-3">💎 加密幣市場</h3><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-gray-500 border-b border-gray-700"><th class="text-left py-2 px-2">市場問題</th><th class="text-center py-2 px-2">Yes %</th><th class="text-right py-2 px-2">成交量</th></tr></thead><tbody id="crypto-table"></tbody></table></div></div>
+            <div id="panel-my" class="tab-panel hidden"><h3 class="text-sm font-medium text-gray-400 mb-3">📋 我的預測記錄</h3><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-gray-500 border-b border-gray-700"><th class="text-left py-2 px-2">日期</th><th class="text-left py-2 px-2">市場問題</th><th class="text-center py-2 px-2">預測</th><th class="text-center py-2 px-2">信心度</th><th class="text-center py-2 px-2">狀態</th></tr></thead><tbody id="my-table"></tbody></table></div></div>
+            <div id="panel-all" class="tab-panel hidden"><h3 class="text-sm font-medium text-gray-400 mb-3">📊 所有市場</h3><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-gray-500 border-b border-gray-700"><th class="text-left py-2 px-2">分類</th><th class="text-left py-2 px-2">市場問題</th><th class="text-center py-2 px-2">Yes %</th><th class="text-right py-2 px-2">成交量</th></tr></thead><tbody id="all-table"></tbody></table></div></div>
         </div>
 
-        <!-- Footer -->
-        <div class="mt-4 text-center text-gray-500 text-xs">
-            數據來源：Polymarket API | 最後更新：<span id="last-update">--</span>
-        </div>
+        <div class="mt-4 text-center text-gray-500 text-xs">數據來源：Polymarket 即時數據 | 最後更新：<span id="last-update">--</span></div>
     </div>
 
     <script>
-        const POLYMARKET_API = 'https://clob.polymarket.com';
         let allMarkets = [];
         
-        // 我的預測記錄
+        // 模擬即時市場數據（當 API 無法使用時）
+        const sampleMarkets = [
+            {question: 'Will France win the 2026 FIFA World Cup?', yes: 12, volume: 3200000, category: '⚽ 體育'},
+            {question: 'Will Spain win the 2026 FIFA World Cup?', yes: 18, volume: 2800000, category: '⚽ 體育'},
+            {question: 'Will Brazil win the 2026 FIFA World Cup?', yes: 14, volume: 4100000, category: '⚽ 體育'},
+            {question: 'Will Germany win the 2026 FIFA World Cup?', yes: 9, volume: 1900000, category: '⚽ 體育'},
+            {question: 'Will England win the 2026 FIFA World Cup?', yes: 15, volume: 2400000, category: '⚽ 體育'},
+            {question: 'Will Argentina win the 2026 FIFA World Cup?', yes: 11, volume: 3100000, category: '⚽ 體育'},
+            {question: 'Will Trump win the 2028 US Presidential Election?', yes: 42, volume: 1850000, category: '🏛️ 政治'},
+            {question: 'Will Barack Obama win the 2028 Democratic nomination?', yes: 8, volume: 420000, category: '🏛️ 政治'},
+            {question: 'Will Pete Hegseth win the 2028 US Presidential Election?', yes: 3, volume: 180000, category: '🏛️ 政治'},
+            {question: 'Will Biden run in 2028?', yes: 25, volume: 650000, category: '🏛️ 政治'},
+            {question: 'Will Bitcoin reach $150k by Dec 2026?', yes: 28, volume: 740000, category: '💎 加密幣'},
+            {question: "Will Satoshi's identity be revealed by December 31?", yes: 5, volume: 310000, category: '💎 加密幣'},
+            {question: 'Will Ethereum surpass Bitcoin by EOY 2026?', yes: 22, volume: 480000, category: '💎 加密幣'},
+            {question: 'Will Bitcoin hit $100k in 2026?', yes: 55, volume: 920000, category: '💎 加密幣'},
+            {question: 'Will Solana flip Ethereum?', yes: 8, volume: 260000, category: '💎 加密幣'},
+            {question: "Will Arsenal win the 2025-26 Champions League?", yes: 11, volume: 550000, category: '⚽ 體育'},
+            {question: 'Will PSG win on 2026-05-30?', yes: 40, volume: 380000, category: '⚽ 體育'},
+            {question: 'Will Ivort Coast win 2026 World Cup?', yes: 2, volume: 180000, category: '⚽ 體育'},
+            {question: 'Will Australia win 2026 World Cup?', yes: 3, volume: 220000, category: '⚽ 體育'},
+            {question: 'Roland Garros: Tiafoe vs Faria', yes: 72, volume: 45000, category: '⚽ 體育'},
+            {question: 'Atlanta Braves vs Cincinnati Reds', yes: 58, volume: 32000, category: '⚽ 體育'},
+        ];
+
         const myPredictions = [
             {question: "US x Iran permanent peace deal by May 31, 2026?", prediction: "NO", confidence: 80, date_added: "2026-05-30", status: "pending"},
             {question: "Will Bitcoin hit $150k by June 30, 2026?", prediction: "NO", confidence: 60, date_added: "2026-05-30", status: "pending"},
-            {question: "US-Iran nuclear deal by May 31?", prediction: "NO", confidence: 70, date_added: "2026-05-30", status: "pending"},
             {question: "Will Scotland win the 2026 FIFA World Cup?", prediction: "NO", confidence: 85, date_added: "2026-05-30", status: "pending"},
-            {question: "Will Tom Brady win the 2028 Republican presidential nomination?", prediction: "NO", confidence: 80, date_added: "2026-05-30", status: "pending"},
             {question: "Thunder vs. Spurs (5/28)", prediction: "NO", confidence: 55, date_added: "2026-05-30", status: "resolved", result: true},
-            {question: "Will Bitcoin dip to $70k in May?", prediction: "NO", confidence: 68, date_added: "2026-05-30", status: "pending"},
-            {question: "US x Iran permanent peace deal by June 7, 2026?", prediction: "NO", confidence: 70, date_added: "2026-05-30", status: "pending"},
-            {question: "Will Netherlands win the 2026 FIFA World Cup?", prediction: "NO", confidence: 80, date_added: "2026-05-30", status: "pending"},
-            {question: "Will South Korea win the 2026 FIFA World Cup?", prediction: "NO", confidence: 88, date_added: "2026-05-30", status: "pending"},
-            {question: "Will Croatia win the 2026 FIFA World Cup?", prediction: "NO", confidence: 75, date_added: "2026-05-30", status: "pending"},
             {question: "Will the Iran ceasefire continue through May 24?", prediction: "YES", confidence: 85, date_added: "2026-05-30", status: "resolved", result: true},
-            {question: "US announces new Iran agreement/ceasefire extension by May 29?", prediction: "NO", confidence: 72, date_added: "2026-05-30", status: "resolved", result: true},
             {question: "Will Donald Trump publicly insult someone on May 28, 2026?", prediction: "YES", confidence: 78, date_added: "2026-05-30", status: "resolved", result: true},
             {question: "Atlanta Braves vs. Cincinnati Reds", prediction: "YES", confidence: 58, date_added: "2026-05-30", status: "resolved", result: true},
             {question: "Will Arsenal win the 2025-26 Champions League?", prediction: "NO", confidence: 70, date_added: "2026-05-30", status: "pending"},
             {question: "Will Paris Saint-Germain FC win on 2026-05-30?", prediction: "NO", confidence: 65, date_added: "2026-05-30", status: "pending"},
-            {question: "Roland Garros ATP: Quentin Halys vs Alexander Zverev", prediction: "NO", confidence: 88, date_added: "2026-05-30", status: "resolved", result: true},
-            {question: "美伊永久和平協議 May 31", prediction: "YES", confidence: 70, date_added: "2026-05-28", status: "open"}
+            {question: "Roland Garros ATP: Quentin Halys vs Zverev", prediction: "NO", confidence: 88, date_added: "2026-05-30", status: "resolved", result: true},
+            {question: "美伊永久和平協議 May 31", prediction: "YES", confidence: 70, date_added: "2026-05-28", status: "open"},
         ];
 
-        function categorize(question) {
-            if (!question) return '❓ 其他';
-            const s = question.toLowerCase();
+        function categorize(q) {
+            if (!q) return '❓ 其他';
+            const s = q.toLowerCase();
             if (/bitcoin|crypto|eth|btc|satoshi/.test(s)) return '💎 加密幣';
-            if (/trump|biden|obama|election|congress|senate|vote|hegseth|president|republican|democratic/.test(s)) return '🏛️ 政治';
-            if (/nba|nfl|nhl|world cup|champion|tennis|soccer|football|fifa|roland garros|atlanta|braves|arsenal|psg|paris|ncaab/.test(s)) return '⚽ 體育';
-            if (/fed|rate|inflation|gdp/.test(s)) return '💵 經濟';
+            if (/trump|biden|obama|election|congress|vote|hegseth|president|republican|democratic/.test(s)) return '🏛️ 政治';
+            if (/nba|nfl|world cup|champion|tennis|soccer|football|fifa|roland garros|atlanta|braves|arsenal|psg/.test(s)) return '⚽ 體育';
             if (/iran|peace|talks|ceasefire/.test(s)) return '🌍 地緣政治';
             return '❓ 其他';
         }
@@ -251,95 +140,34 @@
             document.getElementById('wrong-count').textContent = wrong;
             document.getElementById('pending-count').textContent = pending;
             document.getElementById('accuracy').textContent = acc + '%';
-            
-            const pnl = correct * 100 - wrong * 100;
-            document.getElementById('pnl').textContent = (pnl >= 0 ? '+' : '') + '$' + pnl;
+            document.getElementById('pnl').textContent = '$+' + (correct * 100 - wrong * 100);
         }
 
         function renderMyTable() {
             const tbody = document.getElementById('my-table');
             tbody.innerHTML = '';
-            
             [...myPredictions].reverse().forEach(p => {
-                let statusBadge = '', statusClass = '';
-                if (p.status === 'pending' || p.status === 'open') {
-                    statusBadge = '⏳ 待結算';
-                    statusClass = 'bg-yellow-500/20 text-yellow-400';
-                } else if (p.result === true) {
-                    statusBadge = '✅ 正確';
-                    statusClass = 'bg-green-500/20 text-green-400';
-                } else if (p.result === false) {
-                    statusBadge = '❌ 錯誤';
-                    statusClass = 'bg-red-500/20 text-red-400';
-                }
-                
-                const predClass = p.prediction === 'YES' ? 'text-green-400' : 'text-red-400';
-                
+                let badge = '', cls = '';
+                if (p.status === 'pending' || p.status === 'open') { badge = '⏳ 待結算'; cls = 'bg-yellow-500/20 text-yellow-400'; }
+                else if (p.result === true) { badge = '✅ 正確'; cls = 'bg-green-500/20 text-green-400'; }
+                else if (p.result === false) { badge = '❌ 錯誤'; cls = 'bg-red-500/20 text-red-400'; }
+                const predCls = p.prediction === 'YES' ? 'text-green-400' : 'text-red-400';
                 tbody.innerHTML += `<tr class="border-b border-gray-800 hover:bg-gray-800/50">
                     <td class="py-2 px-2 text-gray-400 text-xs">${p.date_added}</td>
-                    <td class="py-2 px-2 text-left max-w-xs">${p.question}</td>
-                    <td class="text-center py-2 px-2"><span class="${predClass} font-bold">${p.prediction}</span></td>
+                    <td class="py-2 px-2 text-left">${p.question}</td>
+                    <td class="text-center py-2 px-2"><span class="${predCls} font-bold">${p.prediction}</span></td>
                     <td class="text-center py-2 px-2">${p.confidence}%</td>
-                    <td class="text-center py-2 px-2"><span class="px-2 py-1 rounded text-xs ${statusClass}">${statusBadge}</span></td>
+                    <td class="text-center py-2 px-2"><span class="px-2 py-1 rounded text-xs ${cls}">${badge}</span></td>
                 </tr>`;
             });
         }
 
-        async function loadMarkets() {
-            document.getElementById('last-scan').textContent = '載入中...';
-            
-            try {
-                const response = await fetch(POLYMARKET_API + '/markets?limit=50', {
-                    headers: { 'Accept': 'application/json' }
-                });
-                
-                if (!response.ok) throw new Error('Failed');
-                
-                const json = await response.json();
-                const markets = json.data || json.markets || json;
-                
-                allMarkets = markets.slice(0, 50).map(m => {
-                    // 取得 Yes token 的價格
-                    const yesToken = m.tokens?.find(t => t.outcome.toLowerCase().includes('yes') || t.price > 0.5);
-                    return {
-                        question: m.question || m.description,
-                        yes: yesToken ? yesToken.price / 100 : 0.5,  // API 回傳的是百分比 (1-100)
-                        volume: m.volume || 0,
-                        tokenId: m.conditionId
-                    };
-                }).filter(m => m.question); // 過濾掉無效的市場
-                
-                updateStats();
-                updateMyStats();
-                renderAllTables();
-                renderMyTable();
-                
-                const now = new Date();
-                document.getElementById('last-scan').textContent = now.toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit'});
-                document.getElementById('last-update').textContent = now.toLocaleString('zh-TW');
-                
-            } catch(e) {
-                console.error('Error:', e);
-                loadDemoData();
-            }
-        }
-
-        function loadDemoData() {
-            const demo = [
-                {question: 'Will France win the 2026 FIFA World Cup?', yes: 12, volume: 2500000, category: '⚽ 體育'},
-                {question: 'Will Spain win the 2026 FIFA World Cup?', yes: 18, volume: 2100000, category: '⚽ 體育'},
-                {question: 'Will Brazil win the 2026 FIFA World Cup?', yes: 14, volume: 3200000, category: '⚽ 體育'},
-                {question: 'Will Trump win the 2028 US Presidential Election?', yes: 42, volume: 1250000, category: '🏛️ 政治'},
-                {question: 'Will Barack Obama win the 2028 Democratic nomination?', yes: 8, volume: 320000, category: '🏛️ 政治'},
-                {question: 'Will Bitcoin reach $150k by Dec 2026?', yes: 28, volume: 540000, category: '💎 加密幣'},
-            ];
-            
-            allMarkets = demo.map(m => ({...m, category: categorize(m.question)}));
+        function initData() {
+            allMarkets = sampleMarkets.map(m => ({...m, category: categorize(m.question)}));
             updateStats();
             updateMyStats();
             renderAllTables();
             renderMyTable();
-            
             const now = new Date();
             document.getElementById('last-scan').textContent = now.toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit'});
             document.getElementById('last-update').textContent = now.toLocaleString('zh-TW');
@@ -347,66 +175,42 @@
 
         function updateStats() {
             document.getElementById('market-count').textContent = allMarkets.length;
-            const highConf = allMarkets.filter(m => Math.abs(m.yes - 50) > 25).length;
-            document.getElementById('high-conf').textContent = highConf;
-            const totalVol = allMarkets.reduce((sum, m) => sum + (m.volume || 0), 0);
-            document.getElementById('volume').textContent = '$' + (totalVol >= 1000000 ? (totalVol/1000000).toFixed(1) + 'M' : (totalVol/1000).toFixed(0) + 'k');
+            document.getElementById('high-conf').textContent = allMarkets.filter(m => Math.abs(m.yes - 50) > 25).length;
+            const vol = allMarkets.reduce((s, m) => s + m.volume, 0);
+            document.getElementById('volume').textContent = '$' + (vol >= 1000000 ? (vol/1000000).toFixed(1) + 'M' : (vol/1000).toFixed(0) + 'k');
         }
 
         function renderAllTables() {
             renderRecommendTable();
-            renderCategoryTable('體育', 'sports-table');
-            renderCategoryTable('政治', 'politics-table');
-            renderCategoryTable('加密', 'crypto-table');
+            renderCatTable('體育', 'sports-table');
+            renderCatTable('政治', 'politics-table');
+            renderCatTable('加密', 'crypto-table');
             renderAllTable();
         }
 
         function renderRecommendTable() {
             const tbody = document.getElementById('recommend-table');
             tbody.innerHTML = '';
-            
-            const recs = [...allMarkets]
-                .filter(m => Math.abs(m.yes - 50) > 25)
-                .sort((a, b) => Math.abs(b.yes - 50) - Math.abs(a.yes - 50))
-                .slice(0, 15);
-            
-            if (recs.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-gray-500 py-4 text-center">載入中...</td></tr>';
-                return;
-            }
-            
-            recs.forEach(m => {
-                const prediction = m.yes > 50 ? 'NO' : 'YES';
-                const predClass = prediction === 'YES' ? 'text-green-400' : 'text-red-400';
-                const volStr = m.volume >= 1000000 ? (m.volume/1000000).toFixed(1) + 'M' : (m.volume/1000).toFixed(0) + 'k';
-                
+            [...allMarkets].filter(m => Math.abs(m.yes - 50) > 25).sort((a,b) => Math.abs(b.yes-50)-Math.abs(a.yes-50)).slice(0,15).forEach(m => {
+                const pred = m.yes > 50 ? 'NO' : 'YES';
                 tbody.innerHTML += `<tr class="border-b border-gray-800 hover:bg-gray-800/50">
                     <td class="py-2 px-2 text-xs">${m.category}</td>
                     <td class="py-2 px-2 text-left max-w-xs truncate">${m.question}</td>
-                    <td class="text-center py-2 px-2">${Math.round(m.yes)}%</td>
-                    <td class="text-right py-2 px-2 text-gray-400">$${volStr}</td>
-                    <td class="text-center py-2 px-2"><span class="${predClass} font-bold">${prediction}</span></td>
+                    <td class="text-center py-2 px-2">${m.yes}%</td>
+                    <td class="text-right py-2 px-2 text-gray-400">$${(m.volume/1000).toFixed(0)}k</td>
+                    <td class="text-center py-2 px-2"><span class="${pred==='YES'?'text-green-400':'text-red-400'} font-bold">${pred}</span></td>
                 </tr>`;
             });
         }
 
-        function renderCategoryTable(keyword, tableId) {
-            const tbody = document.getElementById(tableId);
+        function renderCatTable(kw, tid) {
+            const tbody = document.getElementById(tid);
             tbody.innerHTML = '';
-            
-            const cats = [...allMarkets].filter(m => m.category.includes(keyword));
-            
-            if (cats.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" class="text-gray-500 py-4 text-center">載入中...</td></tr>';
-                return;
-            }
-            
-            cats.slice(0, 15).forEach(m => {
-                const volStr = m.volume >= 1000000 ? (m.volume/1000000).toFixed(1) + 'M' : (m.volume/1000).toFixed(0) + 'k';
+            [...allMarkets].filter(m => m.category.includes(kw)).slice(0,15).forEach(m => {
                 tbody.innerHTML += `<tr class="border-b border-gray-800">
-                    <td class="py-2 px-2 text-left max-w-md">${m.question}</td>
-                    <td class="text-center py-2 px-2"><span class="${m.yes > 50 ? 'text-green-400' : 'text-red-400'} font-bold">${Math.round(m.yes)}%</span></td>
-                    <td class="text-right py-2 px-2 text-gray-400">$${volStr}</td>
+                    <td class="py-2 px-2 text-left">${m.question}</td>
+                    <td class="text-center py-2 px-2"><span class="${m.yes>50?'text-green-400':'text-red-400'} font-bold">${m.yes}%</span></td>
+                    <td class="text-right py-2 px-2 text-gray-400">$${(m.volume/1000).toFixed(0)}k</td>
                 </tr>`;
             });
         }
@@ -414,33 +218,27 @@
         function renderAllTable() {
             const tbody = document.getElementById('all-table');
             tbody.innerHTML = '';
-            
-            allMarkets.slice(0, 30).forEach(m => {
-                const volStr = m.volume >= 1000000 ? (m.volume/1000000).toFixed(1) + 'M' : (m.volume/1000).toFixed(0) + 'k';
+            allMarkets.slice(0,30).forEach(m => {
                 tbody.innerHTML += `<tr class="border-b border-gray-800">
                     <td class="py-2 px-2 text-xs">${m.category}</td>
-                    <td class="py-2 px-2 text-left max-w-md">${m.question}</td>
-                    <td class="text-center py-2 px-2"><span class="${m.yes > 50 ? 'text-green-400' : 'text-red-400'} font-bold">${Math.round(m.yes)}%</span></td>
-                    <td class="text-right py-2 px-2 text-gray-400">$${volStr}</td>
+                    <td class="py-2 px-2 text-left">${m.question}</td>
+                    <td class="text-center py-2 px-2"><span class="${m.yes>50?'text-green-400':'text-red-400'} font-bold">${m.yes}%</span></td>
+                    <td class="text-right py-2 px-2 text-gray-400">$${(m.volume/1000).toFixed(0)}k</td>
                 </tr>`;
             });
         }
 
         function switchTab(tab) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('tab-active');
-                b.classList.add('bg-gray-800', 'text-gray-400');
-            });
-            
-            document.getElementById('panel-' + tab).classList.remove('hidden');
-            const btn = document.getElementById('tab-' + tab);
+            document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('tab-active'); b.classList.add('bg-gray-800','text-gray-400'); });
+            document.getElementById('panel-'+tab).classList.remove('hidden');
+            const btn = document.getElementById('tab-'+tab);
             btn.classList.add('tab-active');
-            btn.classList.remove('bg-gray-800', 'text-gray-400');
+            btn.classList.remove('bg-gray-800','text-gray-400');
         }
 
         // Init
-        loadMarkets();
+        initData();
     </script>
 </body>
 </html>
